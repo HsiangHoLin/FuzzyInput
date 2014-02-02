@@ -1,7 +1,7 @@
 FuzzyInput
 =====
 
-Prefix tree style fuzzy spell checker, auto-complete and auto-correction
+Prefix tree style fuzzy spell checker including auto-complete and auto-correction
 
 ### Insertion and Deletion Tolerance
     > neccesary
