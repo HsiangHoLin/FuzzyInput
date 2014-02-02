@@ -13,4 +13,4 @@ Prefix tree style fuzzy spell checker, auto-complete and auto-correction
     > moyjer
     > mother
 
-[crz][http://hsiangholin.github.io/blog/crzinput.html]
+[crz]:http://hsiangholin.github.io/blog/crzinput.html
