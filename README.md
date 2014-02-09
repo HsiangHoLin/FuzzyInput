@@ -12,7 +12,7 @@ Prefix tree style fuzzy spell checker including auto-complete and auto-correctio
 ### Keyboard Vicinity ([Gesture][crz]) 
     > moyjer
     > mother
-#### Credit
+### Credit
 Source of frequent word list:
 http://www.insightin.com/esl/
 
