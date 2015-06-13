@@ -19,11 +19,11 @@ int main(int argc, char** argv)
 {
     FILE *fin = fopen("wordlist/list.txt", "r");
     FILE *fconf = fopen("fuzzyi.conf", "r");
-	char buf[BUFF_SIZE] = {0};
+    char buf[BUFF_SIZE] = {0};
     char query[BUFF_SIZE] = {0};
-	int id = 0;
-	int going = 1;
-	word_data data;
+    int id = 0;
+    int going = 1;
+    word_data data;
 
     fuzzy_struct* fuzs = fuzzy_new();
 
@@ -44,10 +44,12 @@ int main(int argc, char** argv)
     while(going)
     {
         printf ("Typing (1 to leave):");
-        gets(query); 
+        fgets(query, BUFF_SIZE, stdin); 
 
         if(atoi(query) == 1)
             break;
+
+	    query[strlen(query)-2] = '\0';
 
         if(fuzzy_search(fuzs, buf, query) == FUZZYI_HIT)
         {

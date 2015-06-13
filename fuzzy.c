@@ -20,8 +20,8 @@
 typedef struct TRIE_NODE_ trie_node;
 struct TRIE_NODE_
 {
-    trie_node *next_list;
-    trie_node *next_one;
+    trie_node *child_list;
+    trie_node *next;
     int is_final;
     char* pattern;
     char key;
@@ -36,22 +36,22 @@ struct FUZZY_STRUCT_
 
 static inline trie_node* trie_node_get_children_head(trie_node* n)
 {
-	return n->next_list;
+	return n->child_list;
 }
 
 static inline trie_node* trie_node_get_next_sibling(trie_node* n)
 {
-	return n->next_one;
+	return n->next;
 }
 
 void trie_node_set_next_sibling(trie_node* node, trie_node* next)
 {
-	node->next_one = next;
+	node->next = next;
 }
 
 void trie_node_set_next_head(trie_node* node, trie_node* next)
 {
-	node->next_list = next;
+	node->child_list = next;
 }
 
 trie_node* trie_node_lookup_children(trie_node* n, char ch)
@@ -87,8 +87,8 @@ trie_node* trie_node_new(char key)
     trie_node* n = (trie_node*) malloc(sizeof(trie_node));
     if(!n)
         return NULL;
-    n->next_list = NULL;
-    n->next_one = NULL;
+    n->child_list = NULL;
+    n->next = NULL;
     n->pattern = NULL;
     n->key = key;
     n->is_final = 0;
@@ -189,8 +189,8 @@ fuzzy_struct* fuzzy_new(void)
         free(fuzs);
         return NULL;
     }
-    fuzs->root->next_list = NULL;
-    fuzs->root->next_one = NULL;
+    fuzs->root->child_list = NULL;
+    fuzs->root->next = NULL;
     fuzs->root->key = 0;
     fuzs->root->is_final = 0;
    
@@ -317,7 +317,7 @@ int fuzzy_search(fuzzy_struct *fuzs, char *result, char *query)
     if(!fuzs)
         return -1;
 
-    if(strlen(query) > 5)
+    if(strlen(query) > 4)
     {
         quo_del = 1;
         quo_add = 1;
