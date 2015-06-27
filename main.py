@@ -6,7 +6,7 @@ with open('wordlist/list.txt', 'r') as f:
     for line in f:
         fuzzy.build(line)
 
-result = fuzzy.search('success')
+result = fuzzy.search('auccess')
 
 for ret in result:
     print ret

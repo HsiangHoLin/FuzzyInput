@@ -79,9 +79,10 @@ def search(spell):
     '''
         Search for the results of a spelling
     '''
-    results = []
+    u_results = {}
     global root
-    dfs(root, 0, spell, results, 0, 0, 0)
+    dfs(root, 0, spell, u_results, 1, 1, 2)
+    results = u_results.items()
     return sorted(results, key=lambda results: results[1])
 
 def dfs(node, pos, spell, results, insert, delete, fuzz):
@@ -101,13 +102,14 @@ def dfs(node, pos, spell, results, insert, delete, fuzz):
             if delete > 0:
                 for ch in node.child_node.values():
                     dfs(ch, pos, spell, results, insert, delete-1, fuzz)
-            if fuzz > 0:
-                for fuz_char in key_map[spell[pos]]:
-                    if fuz_char in node.child_char:
-                        dfs(node.child_node[fuz_char], pos + 1, spell, results, insert, delete, fuzz-1)
+
+        if fuzz > 0:
+            for fuz_char in key_map[spell[pos]]:
+                if fuz_char in node.child_char:
+                    dfs(node.child_node[fuz_char], pos + 1, spell, results, insert, delete, fuzz-1)
     else:
         if node.word:
-            results.append((node.word, node.pri))
+            results[node.word] = node.pri
         length = min(len(node.child_char), 3)
         for i in range(length):
             dfs(node.child_node[node.child_char[i]], pos, spell, results, 0, 0, 0)
