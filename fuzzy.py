@@ -81,9 +81,22 @@ def search(spell):
     '''
     u_results = {}
     global root
-    dfs(root, 0, spell, u_results, 1, 1, 2)
-    results = u_results.items()
-    return sorted(results, key=lambda results: results[1])
+
+    spell = spell.lower()
+    spell = re.sub('[^a-z]', ' ', spell)
+    spell = spell.split();
+    if len(spell):
+        spell = spell[0]
+        if len(spell) > 2:
+            dfs(root, 0, spell, u_results, 1, 1, 2)
+            results = u_results.items()
+            results = [a[0] for a in sorted(results, key=lambda results: results[1])]
+        else:
+            results = [spell]
+    else:
+        results = []
+
+    return results
 
 def dfs(node, pos, spell, results, insert, delete, fuzz):
     '''
@@ -96,12 +109,14 @@ def dfs(node, pos, spell, results, insert, delete, fuzz):
     if pos < len(spell):
         if spell[pos] in node.child_char:
             dfs(node.child_node[spell[pos]], pos + 1, spell, results, insert, delete, fuzz)
-        else:
-            if insert > 0:
-                dfs(node, pos + 1, spell, results, insert - 1, delete, fuzz)
-            if delete > 0:
-                for ch in node.child_node.values():
-                    dfs(ch, pos, spell, results, insert, delete-1, fuzz)
+
+        if insert > 0:
+            dfs(node, pos + 1, spell, results, insert - 1, delete, fuzz)
+
+
+        if delete > 0:
+            for ch in node.child_node.values():
+                dfs(ch, pos, spell, results, insert, delete-1, fuzz)
 
         if fuzz > 0:
             for fuz_char in key_map[spell[pos]]:
