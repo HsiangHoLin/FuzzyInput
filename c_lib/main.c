@@ -17,7 +17,7 @@
 
 int main(int argc, char** argv)
 {
-    FILE *fin = fopen("wordlist/list.txt", "r");
+    FILE *fin = fopen("../wordlist/list.txt", "r");
     FILE *fconf = fopen("fuzzyi.conf", "r");
     char buf[BUFF_SIZE] = {0};
     char query[BUFF_SIZE] = {0};
