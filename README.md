@@ -18,7 +18,7 @@ http://www.insightin.com/esl/
 
 ### Web Demo
 
-I built a web page to demo FuzzyInput, you can visit it [here][fuzzyweb].
+I've built a web page to demo FuzzyInput, you can visit it [here][fuzzyweb].
 
 
 
