@@ -1,10 +1,6 @@
 import fuzzy
 
-fuzzy.init()
-
-with open('../wordlist/list.txt', 'r') as f:
-    for line in f:
-        fuzzy.build(line)
+fuzzy.load('../wordlist/list.txt')
 
 result = fuzzy.search('eucation')
 

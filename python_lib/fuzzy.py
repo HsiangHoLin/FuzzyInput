@@ -7,7 +7,7 @@ class TrieNode:
         self.word = None
         self.pri = 0
 
-root = None
+root = TrieNode()
 counter = 0
 key_map = {
             'a':['s'],
@@ -38,13 +38,6 @@ key_map = {
             'z':['x'],
     }
 
-def init():
-    '''
-        Initialize the root node
-    '''
-    global root
-    root = TrieNode()
-
 def build_helper(word):
     '''
         Build the trie with word
@@ -74,6 +67,11 @@ def build(word):
     ret = re.search(pattern, word)
     if ret and len(word) > 0:
         build_helper(word.rstrip())
+
+def load(file_path):
+    with open(file_path, 'r') as f:
+        for line in f:
+            build(line)
 
 def search(spell):
     '''
