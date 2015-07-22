@@ -83,6 +83,7 @@ def search(spell):
     spell = spell.lower()
     spell = re.sub('[^a-z]', ' ', spell)
     spell = spell.split();
+
     if len(spell):
         spell = spell[0]
         if len(spell) > 2:
@@ -121,9 +122,12 @@ def dfs(node, pos, spell, results, insert, delete, fuzz):
                 if fuz_char in node.child_char:
                     dfs(node.child_node[fuz_char], pos + 1, spell, results, insert, delete, fuzz-1)
     else:
-        if node.word:
-            results[node.word] = node.pri
+        if node.word and node.word not in results:
+            results[node.word] = node.pri * (1 - pow(0.95, len(results)))
+            print node.word, results[node.word], node.pri, len(results)
+
         length = min(len(node.child_char), 3)
+
         for i in range(length):
             dfs(node.child_node[node.child_char[i]], pos, spell, results, 0, 0, 0)
 
