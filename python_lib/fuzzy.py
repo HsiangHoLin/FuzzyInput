@@ -112,7 +112,6 @@ def dfs(node, pos, spell, results, insert, delete, fuzz):
         if insert > 0:
             dfs(node, pos + 1, spell, results, insert - 1, delete, fuzz)
 
-
         if delete > 0:
             for ch in node.child_node.values():
                 dfs(ch, pos, spell, results, insert, delete-1, fuzz)
@@ -121,9 +120,10 @@ def dfs(node, pos, spell, results, insert, delete, fuzz):
             for fuz_char in key_map[spell[pos]]:
                 if fuz_char in node.child_char:
                     dfs(node.child_node[fuz_char], pos + 1, spell, results, insert, delete, fuzz-1)
+
     else:
         if node.word and node.word not in results:
-            results[node.word] = node.pri * (1 - pow(0.95, len(results)))
+            results[node.word] = node.pri * (1 - pow(0.95, len(results) + 1))
 
         length = min(len(node.child_char), 3)
 
