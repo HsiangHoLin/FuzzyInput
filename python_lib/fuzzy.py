@@ -124,7 +124,6 @@ def dfs(node, pos, spell, results, insert, delete, fuzz):
     else:
         if node.word and node.word not in results:
             results[node.word] = node.pri * (1 - pow(0.95, len(results)))
-            print node.word, results[node.word], node.pri, len(results)
 
         length = min(len(node.child_char), 3)
 
