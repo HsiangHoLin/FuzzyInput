@@ -1,8 +1,10 @@
 import fuzzy
 
-fuzzy.load('../wordlist/list.txt')
+engine = fuzzy.init()
 
-result = fuzzy.search('other')
+engine.load('../wordlist/list.txt')
+
+result = engine.search('kkir')
 
 for ret in result:
     print ret
